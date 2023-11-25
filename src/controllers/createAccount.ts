@@ -1,9 +1,13 @@
-// import { Request, Response } from "express";
+import { Request, Response } from "express";
 
-// class createAccount {
-//     async handle(request: Request, response: Response) {
-//         const { data } = request;
+class createAccount {
+    async handle(request: Request, response: Response) {
+        const { name, profession, email, pw } = request.body;
+   
+        response.json({ name, profession, email, pw });
 
-//         return response.json(data)
-//     }
-// }
+        console.log(name, profession, email, pw)
+    }
+}
+
+export { createAccount };

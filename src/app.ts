@@ -1,6 +1,7 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import { router } from './routes';
 
 const app = express();
 
@@ -8,13 +9,7 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-app.post('/login', (req: Request, res: Response) => {
-   const { email, pw } = req.body;
-   
-   res.json({ email, pw });
-
-   console.log(email, pw)
-});
+app.use(router);
 
 app.listen(4000, () => {
    console.log('Server is running on port 4000');
