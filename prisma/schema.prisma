@@ -11,6 +11,6 @@ model users {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   profession  String
-  email       String
+  email       String @unique
   pw          String 
 }
