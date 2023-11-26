@@ -1,12 +1,20 @@
 import { Request, Response } from "express";
+import prisma from '../prisma'
 
 class createAccount {
     async handle(request: Request, response: Response) {
         const { name, profession, email, pw } = request.body;
-   
-        response.json({ name, profession, email, pw });
+        
+        const dataAccount = await prisma.users.create({
+            data: {
+                name,
+                profession,
+                email,
+                pw
+            }
+        })
 
-        console.log(name, profession, email, pw)
+        return response.json(dataAccount)
     }
 }
 
