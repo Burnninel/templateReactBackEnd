@@ -1,16 +1,39 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import { router } from './routes';
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import cookieParser from 'cookie-parser';
+import session from 'express-session'
+import { router } from "./routes";
+import { SECRET_ACCESS_TOKEN } from './config';
+import jwt from 'jsonwebtoken';
 
 const app = express();
 
+declare global {
+  namespace Express {
+    interface Request {
+      user?: Record<string,any>
+    }
+  }
+ }
+
 app.use(bodyParser.json());
 
-app.use(cors());
+app.use(cookieParser());
+
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
+
+app.use(session({
+  secret: SECRET_ACCESS_TOKEN,
+  resave: false,
+  saveUninitialized: true,
+}));
 
 app.use(router);
 
 app.listen(4000, () => {
-   console.log('Server is running on port 4000');
+  console.log("Server is running on port 4000");
 });
