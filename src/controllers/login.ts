@@ -21,7 +21,7 @@ class login {
           email: user.email,
         },
         process.env.SECRET_ACCESS_TOKEN,
-        { subject: user.id, expiresIn: "1m" }
+        { subject: user.id, expiresIn: "1d" }
       );
 
       response.status(200).json(token);
