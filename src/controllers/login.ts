@@ -19,6 +19,8 @@ class login {
           name: user.name,
           profession: user.profession,
           email: user.email,
+          phone: user.phone,
+          photo: user.photo,
         },
         process.env.SECRET_ACCESS_TOKEN,
         { subject: user.id, expiresIn: "1d" }

@@ -13,4 +13,6 @@ model users {
   profession  String
   email       String @unique
   pw          String 
+  phone       String 
+  photo       String 
 }

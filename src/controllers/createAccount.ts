@@ -10,7 +10,9 @@ class createAccount {
                 name,
                 profession,
                 email,
-                pw
+                pw, 
+                phone: null,
+                photo: null
             }
         })
 
