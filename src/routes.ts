@@ -3,7 +3,6 @@ import { login } from "./controllers/login"
 import { createAccount } from "./controllers/createAccount"
 import { account } from "./controllers/account"
 import { updateAccount } from "./controllers/updateAccount"
-// import { esureAuthenticated } from "./services/login"
 
 const router = Router()
 
