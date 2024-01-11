@@ -13,6 +13,7 @@
     "express-session": "^1.17.3",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
+    "multer": "^1.4.5-lts.1",
     "prisma": "^5.6.0"
   },
   "scripts": {
@@ -25,6 +26,7 @@
     "@types/express-jwt": "^7.4.2",
     "@types/express-session": "^1.17.10",
     "@types/jsonwebtoken": "^9.0.5",
+    "@types/multer": "^1.4.11",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.2"
   }
