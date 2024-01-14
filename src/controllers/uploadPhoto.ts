@@ -1,4 +1,5 @@
 import { Request, Response } from "express"
+import prisma from "../prisma";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 class uploadPhoto {
@@ -25,8 +26,33 @@ class uploadPhoto {
             return response.status(400).json({error: 'Formato invalido!'})
           } 
     
+          await prisma.users.update({
+            where: {
+              id: userVerify.id,
+            },
+            data: {
+              photo: file.filename,
+            },
+          })
+
+          const newToken = jwt.sign(
+            {
+              id: userVerify.id,
+              name: userVerify.name,
+              profession: userVerify.profession,
+              email: userVerify.email,
+              phone: userVerify.phone,
+              photo: file.filename,
+            },
+            process.env.SECRET_ACCESS_TOKEN,
+            { subject: userVerify.id, expiresIn: "1h" },
+          );
+
           console.log('Arquivo carregado com sucesso!')
-          return response.status(200).json({ message: 'Arquivo carregado com sucesso!', file: request.file })
+          return response.status(200).json({
+            message: 'Dados atualizados com sucesso!',
+            token: newToken,
+          });
       }
 
     } catch (error) {
