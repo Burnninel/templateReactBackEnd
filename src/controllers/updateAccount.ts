@@ -1,18 +1,17 @@
-import { Request, Response } from "express";
-import prisma from "../prisma";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import { Request, Response } from "express" 
+import prisma from "../prisma" 
+import jwt, { JwtPayload } from "jsonwebtoken" 
 
 class updateAccount {
   async handle(request: Request, response: Response) {
     try {
-
-      const token = request.headers.authorization;
-      const userUpdate = request.body;
+      const token = request.headers.authorization 
+      const userUpdate = request.body 
 
       const userVerify = jwt.verify(
         token,
         process.env.SECRET_ACCESS_TOKEN
-      ) as JwtPayload;
+      ) as JwtPayload 
 
       if (userVerify) {
         await prisma.users.update({
@@ -24,9 +23,7 @@ class updateAccount {
             phone: userUpdate.phone,
             photo: userUpdate.photo,
           },
-        });
-
-        console.log(userUpdate)
+        }) 
 
         const newToken = jwt.sign(
           {
@@ -39,19 +36,17 @@ class updateAccount {
           },
           process.env.SECRET_ACCESS_TOKEN,
           { subject: userVerify.id, expiresIn: "1h" },
-        );
+        ) 
 
-        response.status(200).json({
-          message: 'Dados atualizados com sucesso!',
+        return response.status(200).json({
+          message: 'Data updated successfully!',
           token: newToken,
-        });
+        }) 
       }
-      
     } catch (error) {
-      console.error("Erro ao verificar o token:", error);
-      response.status(401).json({ error: "Token inválido" });
+      return response.status(401).json({ error: "Invalid token!", infoError: error }) 
     }
   }
 }
 
-export { updateAccount };
+export { updateAccount } 
