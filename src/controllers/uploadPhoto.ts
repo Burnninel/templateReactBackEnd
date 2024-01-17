@@ -1,16 +1,16 @@
 import { Request, Response } from "express"
-import prisma from "../prisma";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import prisma from "../prisma" 
+import jwt, { JwtPayload } from "jsonwebtoken" 
 
 class uploadPhoto {
   async handle(request: Request, response: Response) {
     try {
-      const token = request.headers.authorization;
+      const token = request.headers.authorization 
 
       const userVerify = jwt.verify(
         token,
         process.env.SECRET_ACCESS_TOKEN
-      ) as JwtPayload;
+      ) as JwtPayload 
 
       if(userVerify) {
           const file = request.file
@@ -46,13 +46,13 @@ class uploadPhoto {
             },
             process.env.SECRET_ACCESS_TOKEN,
             { subject: userVerify.id, expiresIn: "1h" },
-          );
+          ) 
 
           console.log('Arquivo carregado com sucesso!')
           return response.status(200).json({
             message: 'Dados atualizados com sucesso!',
             token: newToken,
-          });
+          }) 
       }
 
     } catch (error) {

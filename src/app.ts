@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session'
 import { router } from "./routes";
 import { SECRET_ACCESS_TOKEN } from './config';
-import jwt from 'jsonwebtoken';
 
 const app = express();
 
