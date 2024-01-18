@@ -13,11 +13,11 @@ class createAccount {
         }) 
 
         if(user) {
-            return response.status(400).json({ error: "Email already registered!" })
+            return response.status(401).json({ error: "Email already registered!" })
         }
 
         if(!emailRegex.test(email)) {
-            return response.status(400).json({ error: "Invalid email!" })
+            return response.status(401).json({ error: "Invalid email!" })
         }
 
         const dataAccount = await prisma.users.create({
