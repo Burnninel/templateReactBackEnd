@@ -1,4 +1,4 @@
-import { Router } from "express"
+import { Router, Request } from "express"
 import { login } from "./controllers/login"
 import { createAccount } from "./controllers/createAccount"
 import { account } from "./controllers/account"
@@ -15,8 +15,16 @@ const storage = multer.diskStorage({
      cb(null, file.originalname)
     }
 })
+
+const fileFilter = (req: Request, file: Express.Multer.File, cb: (err: Error | null, accept: boolean) => void) => {
+    const validImg = file.mimetype.match(/^image\//)
+    if (!validImg) {
+        return cb(new Error("Invalid image"), false)
+    }
+    cb(null, true)
+ }
    
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage, fileFilter: fileFilter })
 
 const router = Router()
 
