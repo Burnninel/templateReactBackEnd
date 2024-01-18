@@ -31,9 +31,9 @@ app.use(session({
   saveUninitialized: true,
 }))
 
-app.use(router);
+app.use(router)
 
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads'))
 
 app.listen(4000, () => {
   console.log("Server is running on port 4000")
