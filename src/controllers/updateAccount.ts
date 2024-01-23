@@ -21,7 +21,6 @@ class updateAccount {
           data: {
             email: userUpdate.email,
             phone: userUpdate.phone,
-            photo: userUpdate.photo,
           },
         }) 
 
@@ -32,19 +31,21 @@ class updateAccount {
             profession: userVerify.profession,
             email: userUpdate.email || userVerify.email,
             phone: userUpdate.phone || userVerify.phone,
-            photo: userUpdate.photo,
+            photo: userVerify.photo,
           },
           process.env.SECRET_ACCESS_TOKEN,
-          { subject: userVerify.id, expiresIn: "1h" },
+          { subject: userVerify.id, expiresIn: "1h" }
         ) 
 
         return response.status(200).json({
-          message: 'Data updated successfully!',
+          message: "Data updated successfully!",
           token: newToken,
         }) 
       }
     } catch (error) {
-      return response.status(401).json({ error: "Invalid token!", infoError: error }) 
+      return response
+        .status(401)
+        .json({ error: "Invalid token!", infoError: error }) 
     }
   }
 }
